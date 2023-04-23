@@ -17,6 +17,8 @@ PKGS=(
 
   # Xorg
   'xdo'	                        # Perform actions on windows
+  'xorg-xrandr'	                # Set resolution of display
+  'xorg- ktset'	                # Set resolution of display
   'xdotool'	                    # X11 automation tool
   'xclip'	                      # X selections
   'xsel'	                      # Read and modify X selection
@@ -68,6 +70,8 @@ PKGS=(
 
   # PDF Viewer
   'zathura'	'zathura-pdf-mupdf' # Vim based pdf previewer
+
+  'virtualbox-guest-utils' # Vim based pdf previewer
 
   # Fonts
   'ttf-nerd-fonts-symbols'	    # Nerd font icons

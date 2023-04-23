@@ -54,6 +54,9 @@ setup_bspwm_sxhkd() {
   # Install dependencies
   sudo pacman -Sy --noconfirm bspwm sxhkd dmenu rxvt-unicode
 
+  mkdir -p ~/.config/bspwm
+  mkdir -p ~/.config/sxhkd
+
   # Copy default configuration files
   cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
   cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
