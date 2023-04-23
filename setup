@@ -50,12 +50,25 @@ install_ohmyzsh() {
   chsh -s /bin/zsh
 }
 
+setup_bspwm_sxhkd() {
+  # Install dependencies
+  sudo pacman -Sy --noconfirm bspwm sxhkd dmenu rxvt-unicode
+
+  # Copy default configuration files
+  cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
+  cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
+
+  # Set execute permissions on configuration files
+  chmod +x ~/.config/bspwm/bspwmrc ~/.config/sxhkd/sxhkdrc
+}
+
 # Define table of bootstrap tasks
-tasks=(
-  "yay:install_yay"
-  #"neovim:build_neovim"
-  "ohmyzsh:install_ohmyzsh"
-)
+# tasks=(
+#   "yay:install_yay"
+#   "neovim:build_neovim"
+#   "ohmyzsh:install_ohmyzsh"
+#   "bspwm_sxhkd:setup_bspwm_sxhkd"
+# )
 
 # Loop through tasks and execute if requested
 for task in "${tasks[@]}"; do
