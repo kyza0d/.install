@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+PKGS=(
+  # Terminal Utilities
+  'kitty'                       # Terminal Emulator
+  'zsh'                         # Interactive shell
+  'imagemagick'                 # Make modifications to images
+  'fd'                          # Find Command
+  'ripgrep'                     # Recursively searches directories
+  'feh'	                        # Wallpaper manager
+  'lsd'	                        # List files with icons
+  'ranger'	                    # Terminal based file explorer
+  'lazygit'	                    # Git interface
+
+  # Color themes
+  'pywal-python'
+
+  # Xorg
+  'xdo'	                        # Perform actions on windows
+  'xdotool'	                    # X11 automation tool
+  'xclip'	                      # X selections
+  'xsel'	                      # Read and modify X selection
+
+  # Building
+  'p7zip'	                      # Unpack .zip files
+  'ninja'	                      # Build system
+  'cmake'	                      # Make system
+
+  # Functionality
+  'sxhkd'	                      # Hotkey daemon
+  'rofi'	                      # Program launcher
+
+  # Compsitor
+  'picom'	                      # X compositor (fork of Compton)
+
+  # Media
+  'mpv'	                        # Media player
+  'mpd'	                        # Music player daemon
+  'mpc'	                        # Music player controls
+
+  # Audio
+  'pulseaudio'	                # Sound server
+  'pulseaudio-alsa'	            # ALSA Configuration for PulseAudio
+  'alsa-utils'	                # Advanced Linux Sound Architecture
+  'alsa-plugins'	              # Additional ALSA plugins
+
+  # Notifications
+  'dunst'	'libnotify'           # Notification daemon
+
+  # Statusline
+  'polybar'	                    # Statusbar
+
+  # Development
+  'npm' 'yarn'	                # Package manager
+  'nodejs'	                    # JavaScript runtime
+
+  # Source Control
+  'git'	                        # Version control system
+  'github-cli'                  # Github interface
+
+  # Browser
+  'firefox'	                    # Browser of choice
+
+  # Media Utilities
+  'scrot'	                      # Screenshots
+  'peek'	                      # Record gifs
+  'gpick'	                      # Colorpicker
+
+  # PDF Viewer
+  'zathura'	'zathura-pdf-mupdf' # Vim based pdf previewer
+
+  # Fonts
+  'ttf-nerd-fonts-symbols'	    # Nerd font icons
+
+  # Python
+  'python', 'python-pip'        # https://wiki.archlinux.org/title/Python
+)
+
+for PKG in "${PKGS[@]}"; do
+  echo "INSTALLING: ${PKG}"
+  sudo pacman -S "$PKG" --noconfirm --needed
+done

@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Define functions
+
+install_yay() {
+  # Install git (if not already installed)
+  sudo pacman -Sy --noconfirm git
+
+  # Clone yay repository
+  git clone https://aur.archlinux.org/yay.git
+
+  # Navigate to the yay directory
+  cd yay
+
+  # Build and install yay
+  makepkg -si --noconfirm
+
+  # Cleanup
+  cd ..
+  rm -rf yay
+}
+
+build_neovim() {
+  # Install dependencies
+  sudo pacman -Sy --noconfirm base-devel cmake curl libtermkey libuv luajit pkgconf unzip
+
+  # Clone neovim repository
+  git clone https://github.com/neovim/neovim.git
+
+  # Navigate to the neovim directory
+  cd neovim
+
+  # Build and install neovim
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+
+  # Cleanup
+  cd ..
+  rm -rf neovim
+}
+
+install_ohmyzsh() {
+  # Install zsh (if not already installed)
+  sudo pacman -Sy --noconfirm zsh
+
+  # Install Oh My Zsh
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+  # Change the default shell to zsh
+  chsh -s /bin/zsh
+}
+
+# Define table of bootstrap tasks
+tasks=(
+  "yay:install_yay"
+  #"neovim:build_neovim"
+  "ohmyzsh:install_ohmyzsh"
+)
+
+# Loop through tasks and execute if requested
+for task in "${tasks[@]}"; do
+  if [[ "${task}" =~ ^([^:]+):(.+)$ ]]; then
+    name="${BASH_REMATCH[1]}"
+    function="${BASH_REMATCH[2]}"
+    if [[ "${!name}" == "true" ]]; then
+      echo "==> Running task: ${task}"
+      ${function}
+    else
+      echo "==> Skipping task: ${task}"
+    fi
+  else
+    echo "==> Invalid task: ${task}"
+  fi
+done
