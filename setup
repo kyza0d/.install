@@ -1,90 +1,82 @@
 #!/bin/bash
 
-# Define functions
+if [ $# -eq 0 ]; then
+  echo "Please provide at least one argument: ./setup.sh [task1] [task2] ... [taskN]"
+  exit 1
+fi
 
-install_yay() {
-  # Install git (if not already installed)
-  sudo pacman -Sy --noconfirm git
-
-  # Clone yay repository
-  git clone https://aur.archlinux.org/yay.git
-
-  # Navigate to the yay directory
-  cd yay
-
-  # Build and install yay
-  makepkg -si --noconfirm
-
-  # Cleanup
-  cd ..
-  rm -rf yay
+# Define the tasks as functions
+function install_software() {
+  chmod +x "./software"
+  "./software"
 }
 
-build_neovim() {
-  # Install dependencies
-  sudo pacman -Sy --noconfirm base-devel cmake curl libtermkey libuv luajit pkgconf unzip
+function install_oh_my_zsh() {
+  sudo pacman -S --needed curl git zsh
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  chsh -s $(which zsh)
+}
 
-  # Clone neovim repository
-  git clone https://github.com/neovim/neovim.git
-
-  # Navigate to the neovim directory
+function build_neovim() {
+  sudo pacman -S base-devel cmake unzip ninja curl
+  git clone https://github.com/neovim/neovim
   cd neovim
-
-  # Build and install neovim
   make CMAKE_BUILD_TYPE=RelWithDebInfo
   sudo make install
-
-  # Cleanup
   cd ..
   rm -rf neovim
 }
 
-install_ohmyzsh() {
-  # Install zsh (if not already installed)
-  sudo pacman -Sy --noconfirm zsh
-
-  # Install Oh My Zsh
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-  # Change the default shell to zsh
-  chsh -s /bin/zsh
+function install_yay() {
+  git clone https://aur.archlinux.org/yay.git
+  cd yay
+  makepkg -si
+  cd ..
+  rm -rf yay
 }
 
-setup_bspwm_sxhkd() {
-  # Install dependencies
-  sudo pacman -Sy --noconfirm bspwm sxhkd dmenu rxvt-unicode
-
-  mkdir -p ~/.config/bspwm
-  mkdir -p ~/.config/sxhkd
-
-  # Copy default configuration files
-  cp /usr/share/doc/bspwm/examples/bspwmrc ~/.config/bspwm/
-  cp /usr/share/doc/bspwm/examples/sxhkdrc ~/.config/sxhkd/
-
-  # Set execute permissions on configuration files
-  chmod +x ~/.config/bspwm/bspwmrc ~/.config/sxhkd/sxhkdrc
+function install_rustup() {
+  sudo pacman -S rustup
+  rustup default nightly
 }
 
-# Define table of bootstrap tasks
-# tasks=(
-#   "yay:install_yay"
-#   "neovim:build_neovim"
-#   "ohmyzsh:install_ohmyzsh"
-#   "bspwm_sxhkd:setup_bspwm_sxhkd"
-# )
+function install_eww() {
+  sudo pacman -S eww gtk-layer-shell pango gdk-pixbuf2 cairo glib2 gcc-libs glibc
+  git clone https://github.com/elkowar/eww
+  cd eww
+  cargo build --release --no-default-features --features x11
+  cd ./target/release
+  chmod +x ./eww
+  cp ./eww ~/.local/bin/
+  cd ../../../
+  rm -rf eww
+}
 
-# Loop through tasks and execute if requested
-for task in "${tasks[@]}"; do
-  if [[ "${task}" =~ ^([^:]+):(.+)$ ]]; then
-    name="${BASH_REMATCH[1]}"
-    function="${BASH_REMATCH[2]}"
-    if [[ "${!name}" == "true" ]]; then
-      echo "==> Running task: ${task}"
-      ${function}
-    else
-      echo "==> Skipping task: ${task}"
-    fi
-  else
-    echo "==> Invalid task: ${task}"
-  fi
-done
+# Check if "all" is a valid argument
+if [ "$1" == "all" ]; then
+  # Run all tasks
+  tasks=(
+    "install_software"
+    "install_oh_my_zsh"
+    "build_neovim"
+    "install_yay"
+    "install_rustup"
+    "install_eww"
+  )
+  for task in "${tasks[@]}"; do
+    $task
+  done
+else
+  # Run the specified task(s)
+  for arg in "$@"; do
+    case $arg in
+      "install_software") install_software ;;
+      "install_oh_my_zsh") install_oh_my_zsh ;;
+      "build_neovim") build_neovim ;;
+      "install_yay") install_yay ;;
+      "install_rustup") install_rustup ;;
+      "install_eww") install_eww ;;
+      *) echo "Invalid task: $arg" ;;
+    esac
+  done
+fi

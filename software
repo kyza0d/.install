@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 
-PKGS=(
-  # Terminal Utilities
+PACMAN_PKGS=(
+  # Terminal
   'kitty'                       # Terminal Emulator
-  'zsh'                         # Interactive shell
-  'imagemagick'                 # Make modifications to images
-  'fd'                          # Find Command
-  'ripgrep'                     # Recursively searches directories
-  'feh'	                        # Wallpaper manager
+  'imagemagick'                 # Preview images in terminal
+  'ranger' 'python-pillow'      # Terminal based file explorer
+  'fd' 'ranger' 'ripgrep'       # File finding
   'lsd'	                        # List files with icons
-  'ranger'	                    # Terminal based file explorer
-  'lazygit'	                    # Git interface
+  'lazygit'	                    # Git terminal interface
 
   # Color themes
   'pywal-python'
@@ -18,19 +15,17 @@ PKGS=(
   # Xorg
   'xdo'	                        # Perform actions on windows
   'xorg-xrandr'	                # Set resolution of display
-  'xorg- ktset'	                # Set resolution of display
+  'xorg-xset'	                  # User preference utility
   'xdotool'	                    # X11 automation tool
   'xclip'	                      # X selections
   'xsel'	                      # Read and modify X selection
-
-  # Building
-  'p7zip'	                      # Unpack .zip files
-  'ninja'	                      # Build system
-  'cmake'	                      # Make system
+  'xsel'	                      # Read and modify X selection
 
   # Functionality
   'sxhkd'	                      # Hotkey daemon
   'rofi'	                      # Program launcher
+  'p7zip'	                      # Unpack .zip files
+  'feh'	                        # Set wallpaper
 
   # Compsitor
   'picom'	                      # X compositor (fork of Compton)
@@ -71,7 +66,11 @@ PKGS=(
   # PDF Viewer
   'zathura'	'zathura-pdf-mupdf' # Vim based pdf previewer
 
-  'virtualbox-guest-utils' # Vim based pdf previewer
+  # Password Manager
+  'keepassxc'
+
+  # Virtual Box Intergration
+  'virtualbox-guest-utils'
 
   # Fonts
   'ttf-nerd-fonts-symbols'	    # Nerd font icons
@@ -80,7 +79,26 @@ PKGS=(
   'python', 'python-pip'        # https://wiki.archlinux.org/title/Python
 )
 
-for PKG in "${PKGS[@]}"; do
-  echo "INSTALLING: ${PKG}"
+YAY_PKGS=(
+  # Scroll text
+  "zscroll"
+
+  # Get active window title
+  "xtitle"
+)
+
+# Install packages with pacman
+for PKG in "${PACMAN_PKGS[@]}"; do
+  echo "Installing ${PKG} with pacman..."
   sudo pacman -S "$PKG" --noconfirm --needed
 done
+
+# Install packages with yay
+if command -v yay &> /dev/null; then
+  for PKG in "${YAY_PKGS[@]}"; do
+    echo "Installing ${PKG} with yay..."
+    yay -S "$PKG" --noconfirm --needed
+  done
+else
+  echo "yay not found. Skipping installation with yay."
+fi
