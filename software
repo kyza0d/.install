@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+                                #!/usr/bin/env bash
 
 PACMAN_PKGS=(
   # Terminal
@@ -18,12 +18,11 @@ PACMAN_PKGS=(
   'xorg-xset'	                  # User preference utility
   'xdotool'	                    # X11 automation tool
   'xclip'	                      # X selections
-  'xsel'	                      # Read and modify X selection
-  'xsel'	                      # Read and modify X selection
+  'xsel'	                       # Read and modify X selection
 
   # Functionality
   'sxhkd'	                      # Hotkey daemon
-  'rofi'	                      # Program launcher
+  'rofi'	                       # Program launcher
   'p7zip'	                      # Unpack .zip files
   'feh'	                        # Set wallpaper
 
@@ -36,10 +35,10 @@ PACMAN_PKGS=(
   'mpc'	                        # Music player controls
 
   # Audio
-  'pulseaudio'	                # Sound server
+  'pulseaudio'	                 # Sound server
   'pulseaudio-alsa'	            # ALSA Configuration for PulseAudio
-  'alsa-utils'	                # Advanced Linux Sound Architecture
-  'alsa-plugins'	              # Additional ALSA plugins
+  'alsa-utils'	                 # Advanced Linux Sound Architecture
+  'alsa-plugins'	               # Additional ALSA plugins
 
   # Notifications
   'dunst'	'libnotify'           # Notification daemon
@@ -47,9 +46,9 @@ PACMAN_PKGS=(
   # Statusline
   'polybar'	                    # Statusbar
 
-  # Development
-  'npm' 'yarn'	                # Package manager
-  'nodejs'	                    # JavaScript runtime
+                                # Development
+  'npm' 'yarn'	                 # Package manager
+  'nodejs'	                     # JavaScript runtime
 
   # Source Control
   'git'	                        # Version control system
@@ -60,7 +59,7 @@ PACMAN_PKGS=(
 
   # Media Utilities
   'scrot'	                      # Screenshots
-  'peek'	                      # Record gifs
+  'peek'	                       # Record gifs
   'gpick'	                      # Colorpicker
 
   # PDF Viewer
@@ -69,14 +68,13 @@ PACMAN_PKGS=(
   # Password Manager
   'keepassxc'
 
-  # Virtual Box Intergration
-  'virtualbox-guest-utils'
-
   # Fonts
-  'ttf-nerd-fonts-symbols'	    # Nerd font icons
+  'ttf-nerd-fonts-symbols'	     # Nerd font icons
 
   # Python
   'python', 'python-pip'        # https://wiki.archlinux.org/title/Python
+
+  'virtualbox-guest-utils'      # Virtual Box Intergration
 )
 
 YAY_PKGS=(
