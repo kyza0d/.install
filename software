@@ -1,88 +1,104 @@
-                                #!/usr/bin/env bash
+#!/usr/bin/env bash
 
 PACMAN_PKGS=(
-  # Terminal
-  'kitty'                       # Terminal Emulator
-  'imagemagick'                 # Preview images in terminal
-  'ranger' 'python-pillow'      # Terminal based file explorer
-  'fd' 'ranger' 'ripgrep'       # File finding
-  'lsd'	                        # List files with icons
-  'lazygit'	                    # Git terminal interface
+  # -- Terminal ------------------------------------------------
 
-  # Color themes
-  'pywal-python'
+  'kitty'                         # Terminal Emulator
+  'imagemagick'                   # Preview images in terminal
+  'ranger' 'python-pillow'        # Terminal based file explorer
+  'fd' 'ranger' 'ripgrep'         # File finding
+  'lsd'	                          # List files with icons
+  'lazygit'	                      # Git terminal interface
 
-  # Xorg
-  'xdo'	                        # Perform actions on windows
-  'xorg-xrandr'	                # Set resolution of display
-  'xorg-xset'	                  # User preference utility
-  'xdotool'	                    # X11 automation tool
-  'xclip'	                      # X selections
-  'xsel'	                       # Read and modify X selection
+  # -- Color themes --------------------------------------------
 
-  # Functionality
-  'sxhkd'	                      # Hotkey daemon
-  'rofi'	                       # Program launcher
-  'p7zip'	                      # Unpack .zip files
-  'feh'	                        # Set wallpaper
+  'pywal-python'                  # Manage colors of programs
 
-  # Compsitor
-  'picom'	                      # X compositor (fork of Compton)
+  # -- Xorg ----------------------------------------------------
 
-  # Media
-  'mpv'	                        # Media player
-  'mpd'	                        # Music player daemon
-  'mpc'	                        # Music player controls
+  'xdo'	                          # Perform actions on windows
+  'xorg-xrandr'	                  # Set resolution of display
+  'xorg-xset'	                    # User preference utility
+  'xdotool'	                      # X11 automation tool
+  'xclip'	                        # X selections
+  'xsel'	                        # Read and modify X selection
 
-  # Audio
-  'pulseaudio'	                 # Sound server
-  'pulseaudio-alsa'	            # ALSA Configuration for PulseAudio
-  'alsa-utils'	                 # Advanced Linux Sound Architecture
-  'alsa-plugins'	               # Additional ALSA plugins
+  # -- Functionality -------------------------------------------
 
-  # Notifications
-  'dunst'	'libnotify'           # Notification daemon
+  'sxhkd'	                        # Hotkey daemon
+  'rofi'	                        # Program launcher
+  'p7zip'	                        # Unpack .zip files
+  'feh'	                          # Set wallpaper
 
-  # Statusline
-  'polybar'	                    # Statusbar
+  # -- Compsitor -----------------------------------------------
 
-                                # Development
-  'npm' 'yarn'	                 # Package manager
-  'nodejs'	                     # JavaScript runtime
+  'picom'	                        # X compositor (fork of Compton)
 
-  # Source Control
-  'git'	                        # Version control system
-  'github-cli'                  # Github interface
+  # -- Media ---------------------------------------------------
 
-  # Browser
-  'firefox'	                    # Browser of choice
+  'mpv'	                          # Media player
+  'mpd'	                          # Music player daemon
+  'mpc'	                          # Music player controls
 
-  # Media Utilities
-  'scrot'	                      # Screenshots
-  'peek'	                       # Record gifs
-  'gpick'	                      # Colorpicker
+  # -- Audio ---------------------------------------------------
 
-  # PDF Viewer
-  'zathura'	'zathura-pdf-mupdf' # Vim based pdf previewer
+  'pulseaudio'	                  # Sound server
+  'pulseaudio-alsa'	              # ALSA Configuration for PulseAudio
+  'alsa-utils'	                  # Advanced Linux Sound Architecture
+  'alsa-plugins'	                # Additional ALSA plugins
 
-  # Password Manager
+  # -- Notifications -------------------------------------------
+
+  'dunst'	'libnotify'             # Notification daemon
+
+  # -- Statusline ----------------------------------------------
+
+  'polybar'	                      # Statusbar
+
+  # -- Development ---------------------------------------------
+
+  'npm' 'yarn'	                  # Package manager
+  'nodejs'	                      # JavaScript runtime
+
+  # -- Source Control ---------------------------------------------
+
+  'git'	                          # Version control system
+  'github-cli'                    # Github interface
+
+  # -- Browser ----------------------------------------------------
+
+  'firefox'	                      # Browser of choice
+
+  # -- Media Utilities --------------------------------------------
+
+  'scrot'	                        # Screenshots
+  'peek'	                        # Record gifs
+  'gpick'	                        # Colorpicker
+
+  # -- PDF Viewer -------------------------------------------------
+
+  'zathura'	'zathura-pdf-mupdf'   # Vim based pdf previewer
+
+  # -- Password Manager -------------------------------------------
+
   'keepassxc'
 
-  # Fonts
+  # -- Fonts ------------------------------------------------------
+
   'ttf-nerd-fonts-symbols'	     # Nerd font icons
 
-  # Python
+  # -- Python -----------------------------------------------------
+
   'python', 'python-pip'        # https://wiki.archlinux.org/title/Python
+
+  # -- Other ------------------------------------------------------
 
   'virtualbox-guest-utils'      # Virtual Box Intergration
 )
 
 YAY_PKGS=(
-  # Scroll text
-  "zscroll"
-
-  # Get active window title
-  "xtitle"
+  "zscroll" # Scroll text
+  "xtitle" # Get active window title
 )
 
 # Install packages with pacman
